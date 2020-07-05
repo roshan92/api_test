@@ -10,12 +10,8 @@ module ApiTest
     HOST_URL = "https://biodata.herokuapp.com"
 
     def get_resume
-      resume = parsed_response
-      raise APIError unless resume
-      if resume.nil?
-        raise APIError, "Blank response"
-      end
-      resume
+      raise APIError unless parsed_response
+      parsed_response
     end
 
     private

@@ -34,6 +34,13 @@ RSpec.describe "API Requests" do
   end
 
   describe "if request times out" do
+    before do
+      url = "https://biodata.herokuapp.com"
+      @stub_timeout_api = stub_request(:get, url).to_timeout
+    end
 
+    it "should raise a timeout error" do
+      expect{service.get_resume}.to raise_error(ApiTest::APITimeoutError)
+    end
   end
 end

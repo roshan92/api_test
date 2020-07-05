@@ -23,7 +23,14 @@ RSpec.describe "API Requests" do
   end
 
   describe "if response returns empty body" do
+    before do
+      url = "https://biodata.herokuapp.com"
+      @stub_api = stub_request(:get, url).to_return(status: 404, body: '')
+    end
 
+    it "should raise APIError" do
+      expect{service.get_resume}.to raise_error(ApiTest::APIError)
+    end
   end
 
   describe "if request times out" do
